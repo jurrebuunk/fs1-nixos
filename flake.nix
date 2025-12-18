@@ -1,6 +1,4 @@
 {
-  description: "NixOS configuration for fs1-nixos server";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-23.11";
   };
