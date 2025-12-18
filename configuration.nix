@@ -44,7 +44,7 @@
   };
 
   fileSystems."/data/nfs" = {
-    device = "virtiofs0";
+    device = "virtiofs1"; # must match Proxmox tag
     fsType = "virtiofs";
     options = [ "defaults" "nofail" ];
   };
