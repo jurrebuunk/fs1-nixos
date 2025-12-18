@@ -1,0 +1,7 @@
+{ ... }:
+
+{
+  services.nfs.server.exports = ''
+    /mnt/nas nixos-usb(rw,sync,no_subtree_check,no_root_squash)
+  '';
+}
