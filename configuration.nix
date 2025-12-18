@@ -50,7 +50,7 @@
   };
 
   # Enable QEMU guest agent (required for Virtio-FS)
-  services.qemuGuestAgent.enable = true;
+  services.qemuGuest.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
