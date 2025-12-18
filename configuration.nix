@@ -43,10 +43,17 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
+  # Mount the ZFS dataset from the host via virtiofs
+  fileSystems."/data/nfs" = {
+    device = "nas_storage"; # This must match the 'Mount Tag' in Proxmox
+    fsType = "virtiofs";
+  };
+
   environment.systemPackages = with pkgs; [
     vim
     git
     wget
+    nfs-utils # Useful for debugging
   ];
 
   system.stateVersion = "23.11"; # Did you read the comment?
