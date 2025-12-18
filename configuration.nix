@@ -43,10 +43,10 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
-  # Mount Virtio-FS share from host
   fileSystems."/data/nfs" = {
-    device = "virtiofs0";     # Replace with your Virtio-FS tag from Proxmox
+    device = "virtiofs0";
     fsType = "virtiofs";
+    options = [ "defaults" "nofail" ];
   };
 
   # Enable QEMU guest agent (required for Virtio-FS)
