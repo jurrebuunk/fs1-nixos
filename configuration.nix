@@ -43,11 +43,14 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
-  # Mount the ZFS dataset from the host via virtiofs
+  # Mount Virtio-FS share from host
   fileSystems."/data/nfs" = {
-    device = "nas_storage"; # This must match the 'Mount Tag' in Proxmox
+    device = "virtiofs0";     # Replace with your Virtio-FS tag from Proxmox
     fsType = "virtiofs";
   };
+
+  # Enable QEMU guest agent (required for Virtio-FS)
+  services.qemuGuestAgent.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim
