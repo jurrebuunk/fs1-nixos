@@ -3,6 +3,7 @@
 {
   imports =
     [ 
+      ./hardware-configuration.nix
       ./modules/nfs.nix
       ./modules/ansible.nix
     ];
