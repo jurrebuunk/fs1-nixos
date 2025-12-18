@@ -1,13 +1,7 @@
 { config, pkgs, ... }:
 
 {
-  services.nfs.server = {
-    enable = true;
-    # Fixed ports for NFS to make firewall configuration easier
-    lockdPort = 4001;
-    mountdPort = 4002;
-    statdPort = 4003;
-  };
+  services.nfs.server.enable = true;
 
   # Import the exports configuration
   imports = [

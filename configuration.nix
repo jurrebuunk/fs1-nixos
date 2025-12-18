@@ -7,6 +7,9 @@
       ./modules/ansible.nix
     ];
 
+  # Enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
   # Basic system configuration
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda"; # Change this to your actual boot device
