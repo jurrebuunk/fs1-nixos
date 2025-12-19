@@ -11,7 +11,7 @@
       image = "owncloud/ocis:latest";
       ports = [ "9200:9200" ];
       volumes = [
-        "/data/nfs/ogcis:/var/lib/ocis"
+        "/data/nfs/ocis:/var/lib/ocis"
         "/data/nfs/ocis/config:/etc/ocis"
       ];
       environment = {
