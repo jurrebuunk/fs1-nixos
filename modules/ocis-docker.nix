@@ -17,11 +17,13 @@
       environment = {
         OCIS_URL = "https://fs1.lan.buunk.org:9200";
         OCIS_INSECURE = "true";
-        PROXY_TLS = "true"; # Enable self-signed HTTPS
+        PROXY_TLS = "true";
         PROXY_HTTP_ADDR = "0.0.0.0:9200";
         IDP_INSECURE = "true";
         OCIS_OIDC_ISSUER = "https://fs1.lan.buunk.org:9200";
         OCIS_CONFIG_DIR = "/etc/ocis";
+        OCIS_LOG_LEVEL = "info";
+        IDM_CREATE_DEMO_USERS = "true";
       };
     };
   };
