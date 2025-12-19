@@ -28,10 +28,33 @@
     "d /data/nfs/ocis 0750 ocis ocis - -"
   ];
 
-  # Ensure oCIS waits for the mount
+  # Automatic initialization service
+  systemd.services.ocis-init = {
+    description = "Initialize oCIS configuration";
+    before = [ "ocis.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      User = "ocis";
+      Group = "ocis";
+      RemainAfterExit = true;
+      StateDirectory = "ocis";
+    };
+    script = ''
+      if [ ! -f /data/nfs/ocis/config/ocis.yaml ]; then
+        mkdir -p /data/nfs/ocis/config
+        # Run init non-interactively
+        # We set OCIS_CONFIG_DIR to ensure it writes to our NFS mount
+        export OCIS_CONFIG_DIR=/data/nfs/ocis/config
+        ${pkgs.ocis-bin}/bin/ocis init --insecure true
+      fi
+    '';
+  };
+
+  # Ensure oCIS waits for the mount and the init service
   systemd.services.ocis = {
-    requires = [ "data-nfs.mount" ];
-    after = [ "data-nfs.mount" ];
+    requires = [ "data-nfs.mount" "ocis-init.service" ];
+    after = [ "data-nfs.mount" "ocis-init.service" ];
   };
 
   # Open firewall for oCIS
