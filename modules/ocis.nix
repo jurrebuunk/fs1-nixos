@@ -17,6 +17,8 @@
     # if you aren't using SSL yet.
     environment = {
       OCIS_INSECURE = "true";
+      IDP_INSECURE = "true";
+      PROXY_TLS = "false";
       PROXY_HTTP_ADDR = "0.0.0.0:9200";
     };
   };
