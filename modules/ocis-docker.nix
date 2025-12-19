@@ -15,12 +15,12 @@
         "/data/nfs/ocis/config:/etc/ocis"
       ];
       environment = {
-        OCIS_URL = "http://fs1.lan.buunk.org:9200";
+        OCIS_URL = "https://fs1.lan.buunk.org:9200"; # Trick IDP to start
         OCIS_INSECURE = "true";
-        PROXY_TLS = "false";
+        PROXY_TLS = "false"; # But keep proxy on HTTP
         PROXY_HTTP_ADDR = "0.0.0.0:9200";
         IDP_INSECURE = "true";
-        OCIS_OIDC_ISSUER = "http://fs1.lan.buunk.org:9200";
+        OCIS_OIDC_ISSUER = "https://fs1.lan.buunk.org:9200";
         OCIS_CONFIG_DIR = "/etc/ocis";
       };
       extraOptions = [
