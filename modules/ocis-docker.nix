@@ -47,6 +47,7 @@
         ${pkgs.docker}/bin/docker run --rm \
           --user 0:0 \
           -v /data/nfs/ocis/config:/etc/ocis \
+          -e OCIS_CONFIG_DIR=/etc/ocis \
           owncloud/ocis:latest \
           init --insecure true
         
