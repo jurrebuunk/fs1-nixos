@@ -11,7 +11,8 @@
       image = "owncloud/ocis:latest";
       ports = [ "9200:9200" ];
       volumes = [
-        "/data/nfs/ocis:/var/lib/ocis"
+        "/data/nfs/ocis:/var/lib/ocis",
+        "/data/nfs/ocis/config:/etc/ocis"
       ];
       environment = {
         OCIS_URL = "http://fs1.lan.buunk.org:9200";
@@ -19,8 +20,8 @@
         PROXY_TLS = "false";
         PROXY_HTTP_ADDR = "0.0.0.0:9200";
         IDP_INSECURE = "true";
-        # This helps with the "invalid iss" error by explicitly setting the issuer
         OCIS_OIDC_ISSUER = "http://fs1.lan.buunk.org:9200";
+        OCIS_CONFIG_DIR = "/etc/ocis";
       };
       extraOptions = [
         "--name=ocis"
@@ -40,8 +41,9 @@
     script = ''
       if [ ! -f /data/nfs/ocis/config/ocis.yaml ]; then
         echo "Initializing oCIS configuration..."
+        mkdir -p /data/nfs/ocis/config
         ${pkgs.docker}/bin/docker run --rm \
-          -v /data/nfs/ocis:/var/lib/ocis \
+          -v /data/nfs/ocis/config:/etc/ocis \
           owncloud/ocis:latest \
           init --insecure true
         
