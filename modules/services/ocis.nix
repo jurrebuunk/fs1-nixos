@@ -15,15 +15,24 @@
         "/data/nfs/ocis/config:/etc/ocis"
       ];
       environment = {
+        # Primary URL and Security
         OCIS_URL = "https://fs1.lan.buunk.org:9200";
         OCIS_INSECURE = "true";
-        PROXY_TLS = "true";
+        PROXY_TLS = "true"; # Enable self-signed HTTPS
         PROXY_HTTP_ADDR = "0.0.0.0:9200";
+        
+        # Identity Provider (IDP) Settings
         IDP_INSECURE = "true";
         OCIS_OIDC_ISSUER = "https://fs1.lan.buunk.org:9200";
+        IDM_CREATE_DEMO_USERS = "true";
+        
+        # Configuration and Logging
         OCIS_CONFIG_DIR = "/etc/ocis";
         OCIS_LOG_LEVEL = "info";
-        IDM_CREATE_DEMO_USERS = "true";
+        
+        # Additional oCIS 5.0 optimizations
+        OCIS_ASYNC_SEARCH = "true";
+        # PROXY_ENABLE_BASIC_AUTH = "true"; # Useful for some clients
       };
     };
   };

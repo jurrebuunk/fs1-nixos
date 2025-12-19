@@ -7,10 +7,9 @@
     mountdPort = 20048;
     lockdPort = 4001;
     statdPort = 4002;
+    
+    exports = ''
+      /data/nfs *(rw,sync,no_subtree_check,insecure,fsid=0)
+    '';
   };
-
-  # Import the exports configuration
-  imports = [
-    ./nfs-exports.nix
-  ];
 }
