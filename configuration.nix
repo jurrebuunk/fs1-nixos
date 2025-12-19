@@ -33,7 +33,7 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda"; # Change this to your actual boot device
 
-  networking.hostName = "nixos-server";
+  networking.hostName = "fs1";
 
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
