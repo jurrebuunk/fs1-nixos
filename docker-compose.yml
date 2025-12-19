@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  ocis:
+    image: owncloud/ocis:latest
+    container_name: ocis
+    restart: always
+    ports:
+      - "9200:9200"
+    environment:
+      - OCIS_URL=http://fs1.lan.buunk.org:9200
+      - OCIS_INSECURE=true
+      - PROXY_TLS=false
+      - PROXY_HTTP_ADDR=0.0.0.0:9200
+      - IDP_INSECURE=true
+      - OCIS_OIDC_ISSUER=http://fs1.lan.buunk.org:9200
+    volumes:
+      - /data/nfs/ocis:/var/lib/ocis

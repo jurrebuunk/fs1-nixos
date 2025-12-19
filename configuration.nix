@@ -6,7 +6,7 @@
       ./hardware-configuration.nix
       ./modules/nfs.nix
       ./modules/ansible.nix
-      ./modules/ocis.nix
+      ./modules/ocis-docker.nix
     ];
 
   # Enable flakes
