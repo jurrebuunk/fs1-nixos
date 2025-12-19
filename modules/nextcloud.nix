@@ -25,11 +25,18 @@
   };
 
   # Ensure the directory exists with correct permissions
-  # We use a systemd service to ensure the directory is created on the virtiofs mount
-  # and has the correct ownership for the nextcloud user.
+  # We use systemd.tmpfiles to ensure the path is traversable and the datadir is owned by nextcloud
   systemd.tmpfiles.rules = [
+    "d /data 0755 root root - -"
+    "d /data/nfs 0755 root root - -"
     "d /data/nfs/nextcloud 0750 nextcloud nextcloud - -"
   ];
+
+  # Ensure Nextcloud waits for the mount
+  systemd.services.nextcloud-setup = {
+    requires = [ "data-nfs.mount" ];
+    after = [ "data-nfs.mount" ];
+  };
 
   # Create a default admin password if it doesn't exist
   # This is just to get things started; the user should change it later.
