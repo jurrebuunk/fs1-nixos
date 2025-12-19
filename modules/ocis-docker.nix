@@ -28,6 +28,29 @@
     };
   };
 
+  # One-time initialization service using Docker
+  systemd.services.docker-ocis-init = {
+    description = "Initialize oCIS configuration via Docker";
+    before = [ "docker-ocis.service" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      if [ ! -f /data/nfs/ocis/config/ocis.yaml ]; then
+        echo "Initializing oCIS configuration..."
+        ${pkgs.docker}/bin/docker run --rm \
+          -v /data/nfs/ocis:/var/lib/ocis \
+          owncloud/ocis:latest \
+          init --insecure true
+        
+        # Ensure permissions are open enough for the container
+        chmod -R 777 /data/nfs/ocis
+      fi
+    '';
+  };
+
   # Ensure the data directory exists
   systemd.tmpfiles.rules = [
     "d /data/nfs/ocis 0777 root root - -"
@@ -36,9 +59,9 @@
   # Open firewall for oCIS
   networking.firewall.allowedTCPPorts = [ 9200 ];
 
-  # Ensure Docker waits for the NFS mount
+  # Ensure Docker waits for the NFS mount and init
   systemd.services.docker-ocis = {
-    requires = [ "data-nfs.mount" ];
-    after = [ "data-nfs.mount" ];
+    requires = [ "data-nfs.mount" "docker-ocis-init.service" ];
+    after = [ "data-nfs.mount" "docker-ocis-init.service" ];
   };
 }
