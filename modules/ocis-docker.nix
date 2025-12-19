@@ -23,9 +23,6 @@
         OCIS_OIDC_ISSUER = "https://fs1.lan.buunk.org:9200";
         OCIS_CONFIG_DIR = "/etc/ocis";
       };
-      extraOptions = [
-        "--name=ocis"
-      ];
     };
   };
 
