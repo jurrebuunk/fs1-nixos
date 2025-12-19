@@ -4,7 +4,7 @@
   services.nextcloud = {
     enable = true;
     package = pkgs.nextcloud28;
-    hostName = "fs1-nixos.lan.buunk.org"; # Change this to your actual domain or IP
+    hostName = "fs1.lan.buunk.org"; # Change this to your actual domain or IP
     
     # Use the virtiofs mount for data
     datadir = "/data/nfs/nextcloud";
@@ -22,6 +22,15 @@
     
     # Basic Nginx setup
     https = false; 
+
+    extraOptions = {
+      trusted_domains = [
+        "fs1.lan.buunk.org"
+        "192.168.1.113"
+        "fs1"
+      ];
+      "overwrite.cli.url" = "http://fs1.lan.buunk.org";
+    };
   };
 
   # Ensure the directory exists with correct permissions
