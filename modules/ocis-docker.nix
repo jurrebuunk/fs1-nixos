@@ -39,16 +39,18 @@
       RemainAfterExit = true;
     };
     script = ''
+      mkdir -p /data/nfs/ocis/config
+      chmod -R 777 /data/nfs/ocis
+      
       if [ ! -f /data/nfs/ocis/config/ocis.yaml ]; then
         echo "Initializing oCIS configuration..."
-        mkdir -p /data/nfs/ocis/config
         ${pkgs.docker}/bin/docker run --rm \
+          --user 0:0 \
           -v /data/nfs/ocis/config:/etc/ocis \
           owncloud/ocis:latest \
           init --insecure true
         
-        # Ensure permissions are open enough for the container
-        chmod -R 777 /data/nfs/ocis
+        chmod -R 777 /data/nfs/ocis/config
       fi
     '';
   };
