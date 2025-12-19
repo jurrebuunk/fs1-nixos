@@ -15,14 +15,12 @@
         "/data/nfs/ocis/config:/etc/ocis"
       ];
       environment = {
-        OCIS_URL = "http://fs1.lan.buunk.org:9200";
+        OCIS_URL = "https://fs1.lan.buunk.org:9200";
         OCIS_INSECURE = "true";
-        PROXY_TLS = "false";
+        PROXY_TLS = "true"; # Enable self-signed HTTPS
         PROXY_HTTP_ADDR = "0.0.0.0:9200";
         IDP_INSECURE = "true";
-        IDP_ALLOW_INSECURE_RUNTIME = "true"; # Allow HTTP issuer in IDP
-        OCIS_OIDC_ISSUER = "http://fs1.lan.buunk.org:9200";
-        WEB_OIDC_AUTHORITY = "http://fs1.lan.buunk.org:9200";
+        OCIS_OIDC_ISSUER = "https://fs1.lan.buunk.org:9200";
         OCIS_CONFIG_DIR = "/etc/ocis";
       };
       extraOptions = [
