@@ -11,7 +11,7 @@
       image = "owncloud/ocis:latest";
       ports = [ "9200:9200" ];
       volumes = [
-        "/data/nfs/ocis:/var/lib/ocis"
+        "/data/nfs/ogcis:/var/lib/ocis"
         "/data/nfs/ocis/config:/etc/ocis"
       ];
       environment = {
@@ -24,7 +24,9 @@
         # Identity Provider (IDP) Settings
         IDP_INSECURE = "true";
         OCIS_OIDC_ISSUER = "https://fs1.lan.buunk.org:9200";
-        IDM_CREATE_DEMO_USERS = "true";
+        IDM_CREATE_DEMO_USERS = "false";
+        IDM_ADMIN_USER_NAME = "jurre";
+        IDM_ADMIN_PASSWORD = "#Buunkstra1448";
         
         # Configuration and Logging
         OCIS_CONFIG_DIR = "/etc/ocis";
@@ -56,6 +58,8 @@
           --user 0:0 \
           -v /data/nfs/ocis/config:/etc/ocis \
           -e OCIS_CONFIG_DIR=/etc/ocis \
+          -e IDM_ADMIN_USER_NAME=jurre \
+          -e IDM_ADMIN_PASSWORD='#Buunkstra1448' \
           owncloud/ocis:latest \
           init --insecure true
         

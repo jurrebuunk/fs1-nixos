@@ -10,11 +10,8 @@ This repository manages the configuration for the `fs1` server.
 - **Storage**: Virtio-FS mount at `/data/nfs`
 
 #### Login Credentials
-- **Admin Username**: `admin`
-- **Admin Password**: `Kn3La9DLGsvJoS*%IwVJc12-Q7URk1h7`
-- **Demo Users**:
-  - `einstein` / `relativity`
-  - `marie` / `curie`
+- **Admin Username**: `jurre`
+- **Admin Password**: `#Buunkstra1448`
 
 #### Directory Structure
 - `/data/nfs/ocis`: Main data storage (on Virtio-FS)
