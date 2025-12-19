@@ -6,6 +6,7 @@
       ./hardware-configuration.nix
       ./modules/nfs.nix
       ./modules/ansible.nix
+      ./modules/nextcloud.nix
     ];
 
   # Enable flakes
