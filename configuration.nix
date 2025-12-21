@@ -7,6 +7,7 @@
     ./modules/storage/nfs.nix
     ./modules/services/ansible.nix
     ./modules/services/ocis.nix
+    ./modules/services/nginx-reverse-proxy.nix
   ];
 
   # Enable flakes

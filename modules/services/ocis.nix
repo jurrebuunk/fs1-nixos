@@ -16,14 +16,14 @@
       ];
       environment = {
         # Primary URL and Security
-        OCIS_URL = "https://fs1.lan.buunk.org:9200";
-        OCIS_INSECURE = "true";
-        PROXY_TLS = "true"; # Enable self-signed HTTPS
+        OCIS_URL = "https://drive.buunk.org";
+        OCIS_INSECURE = "false";
+        PROXY_TLS = "false"; # Nginx handles TLS termination
         PROXY_HTTP_ADDR = "0.0.0.0:9200";
         
         # Identity Provider (IDP) Settings
-        IDP_INSECURE = "true";
-        OCIS_OIDC_ISSUER = "https://fs1.lan.buunk.org:9200";
+        IDP_INSECURE = "false";
+        OCIS_OIDC_ISSUER = "https://drive.buunk.org";
         IDM_CREATE_DEMO_USERS = "false";
         IDM_ADMIN_USER_NAME = "jurre";
         IDM_ADMIN_PASSWORD = "#Buunkstra1448";
@@ -73,8 +73,8 @@
     "d /data/nfs/ocis 0777 root root - -"
   ];
 
-  # Open firewall for oCIS
-  networking.firewall.allowedTCPPorts = [ 9200 ];
+  # Open firewall for oCIS (commented out - now behind reverse proxy)
+  # networking.firewall.allowedTCPPorts = [ 9200 ];
 
   # Ensure Docker waits for the NFS mount and init
   systemd.services.docker-ocis = {
