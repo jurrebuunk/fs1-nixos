@@ -12,6 +12,17 @@
       i = "0.0.0.0";
       p = 3210;
       no-reload = true;
+      ah-alg = "argon2";
+    };
+
+    # create users
+    accounts = {
+      jurre = {
+        # This creates a file in the Nix store containing the hashed password.
+        # Generate your hash by running `copyparty --ah-cli` on the server.
+        # Replace the placeholder below with your actual hash.
+        passwordFile = pkgs.writeText "jurre-password-hash" "$argon2id$v=19$m=65536,t=3,p=4$+4MDOXr7LhzGpoFgfJCL6p31QFSHWgl4f";
+      };
     };
 
     # create a volume
@@ -20,8 +31,8 @@
         # share the contents of "/mnt/virtiofs/data"
         path = "/mnt/virtiofs/data";
         access = {
-          # everyone gets read-access
-          r = "*";
+          # Only jurre has access, and they have admin rights
+          a = [ "jurre" ];
         };
         flags = {
           # "fk" enables filekeys (necessary for upget permission) (4 chars long)
