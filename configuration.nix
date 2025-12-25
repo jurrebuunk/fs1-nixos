@@ -46,6 +46,8 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
   };
 
+  services.nfs.client.enable = true;
+
   environment.systemPackages = with pkgs; [
     vim
     git
