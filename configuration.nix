@@ -54,6 +54,7 @@
     wget
     curl
     htop
+    nfs-utils
   ];
 
   system.stateVersion = "23.11";
