@@ -12,7 +12,6 @@
       i = "0.0.0.0";
       p = 3210;
       no-reload = true;
-      ah-alg = "argon2";
       usernames = true;
     };
 
@@ -47,6 +46,7 @@
   # Ensure the directory exists and has correct permissions
   systemd.tmpfiles.rules = [
     "d /mnt/virtiofs/data 0750 copyparty copyparty -"
+    "d /run/keys/copyparty 0750 copyparty copyparty -"
   ];
 
   # Open port in firewall
