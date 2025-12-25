@@ -57,5 +57,8 @@
     nfs-utils
   ];
 
+  boot.kernelModules = [ "nfs" "nfsd" ];
+
+  # State version (do *not* modify this!)
   system.stateVersion = "23.11";
 }
