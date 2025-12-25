@@ -13,6 +13,7 @@
       p = 3210;
       no-reload = true;
       ah-alg = "argon2";
+      usernames = true;
     };
 
     # create users
