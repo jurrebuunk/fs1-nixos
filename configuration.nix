@@ -4,10 +4,8 @@
   imports = [ 
     ./hardware-configuration.nix
     ./modules/storage/virtiofs.nix
-    ./modules/storage/nfs.nix
     ./modules/services/ansible.nix
-    ./modules/services/ocis.nix
-    ./modules/services/nginx-reverse-proxy.nix
+    ./modules/services/copyparty.nix
   ];
 
   # Enable flakes
@@ -52,7 +50,6 @@
     vim
     git
     wget
-    nfs-utils # Useful for debugging
     curl
     htop
   ];
