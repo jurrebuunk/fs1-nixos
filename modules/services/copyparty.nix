@@ -21,7 +21,7 @@
         # This creates a file in the Nix store containing the hashed password.
         # Generate your hash by running `copyparty --ah-cli` on the server.
         # Replace the placeholder below with your actual hash.
-        passwordFile = pkgs.writeText "jurre-password-hash" "$argon2id$v=19$m=65536,t=3,p=4$+4MDOXr7LhzGpoFgfJCL6p31QFSHWgl4f";
+        passwordFile = "${pkgs.writeText "jurre-password-hash" "$argon2id$v=19$m=65536,t=3,p=4$+4MDOXr7LhzGpoFgfJCL6p31QFSHWgl4f"}";
       };
     };
 
