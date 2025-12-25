@@ -27,7 +27,7 @@
         path = "/mnt/virtiofs/data";
         access = {
           # Only jurre has access, and they have admin rights
-          a = [ "jurre" ];
+          A = [ "jurre" ];
         };
         flags = {
           # "fk" enables filekeys (necessary for upget permission) (4 chars long)
