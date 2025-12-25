@@ -45,6 +45,29 @@
   # Open port in firewall
   networking.firewall.allowedTCPPorts = [ 3210 ];
 
+  # Ensure the service waits for the mount and the directory exists
+  systemd.services.copyparty-setup = {
+    description = "Prepare copyparty data directory";
+    after = [ "mnt-virtiofs.mount" ];
+    requires = [ "mnt-virtiofs.mount" ];
+    before = [ "copyparty.service" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${pkgs.coreutils}/bin/mkdir -p /mnt/virtiofs/data";
+      ExecStartPost = [
+        "${pkgs.coreutils}/bin/chown copyparty:copyparty /mnt/virtiofs/data"
+        "${pkgs.coreutils}/bin/chmod 0750 /mnt/virtiofs/data"
+      ];
+    };
+  };
+
+  systemd.services.copyparty = {
+    unitConfig.RequiresMountsFor = [ "/mnt/virtiofs/data" ];
+    after = [ "mnt-virtiofs.mount" "copyparty-setup.service" ];
+    requires = [ "mnt-virtiofs.mount" "copyparty-setup.service" ];
+  };
+
   # Add copyparty to system packages
   environment.systemPackages = [ pkgs.copyparty ];
 }
