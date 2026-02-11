@@ -71,8 +71,9 @@
 
   systemd.services.copyparty = {
     unitConfig.RequiresMountsFor = [ "/mnt/virtiofs/data" ];
-    after = [ "mnt-virtiofs.mount" "copyparty-setup.service" ];
-    requires = [ "mnt-virtiofs.mount" "copyparty-setup.service" ];
+    # Ensure tmpfiles (which creates /run/keys/copyparty) runs before the service
+    after = [ "mnt-virtiofs.mount" "copyparty-setup.service" "systemd-tmpfiles-setup.service" ];
+    requires = [ "mnt-virtiofs.mount" "copyparty-setup.service" "systemd-tmpfiles-setup.service" ];
   };
 
   # Add copyparty to system packages
