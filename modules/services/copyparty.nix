@@ -65,6 +65,10 @@
       ExecStartPost = [
         "${pkgs.coreutils}/bin/chown copyparty:copyparty /mnt/virtiofs/data"
         "${pkgs.coreutils}/bin/chmod 0750 /mnt/virtiofs/data"
+        # If an admin-provided secret exists under /etc/copyparty/, install it into /run/keys
+        # This makes the runtime secret available after boot without requiring manual intervention.
+        (builtins.toString (pkgs.bash)) + "/bin/sh -c 'if [ -f /etc/copyparty/jurre_password ]; then " +
+          "${pkgs.coreutils}/bin/install -m0640 -o copyparty -g copyparty /etc/copyparty/jurre_password /run/keys/copyparty/jurre_password; fi'"
       ];
     };
   };
